@@ -123,5 +123,24 @@ header{
         #image{
             display: block;
         }
+
+        #type{
+            display: flex;
+            gap: 4px;
+            flex-direction: row;
+
+            button{
+                padding: 8px;
+                color: #fff;
+                border: none;
+                text-transform: uppercase;
+                transition: filter .5s;
+
+                &:hover{
+                    filter: opacity(0.8);
+                    cursor: pointer;
+                }
+            }
+        }
     }
 }

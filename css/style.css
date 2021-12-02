@@ -146,4 +146,32 @@ header h1 {
 .search-container .pokemon-container #image {
   display: block;
 }
+
+.search-container .pokemon-container #type {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  gap: 4px;
+  -webkit-box-orient: horizontal;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: row;
+          flex-direction: row;
+}
+
+.search-container .pokemon-container #type button {
+  padding: 8px;
+  color: #fff;
+  border: none;
+  text-transform: uppercase;
+  -webkit-transition: -webkit-filter .5s;
+  transition: -webkit-filter .5s;
+  transition: filter .5s;
+  transition: filter .5s, -webkit-filter .5s;
+}
+
+.search-container .pokemon-container #type button:hover {
+  -webkit-filter: opacity(0.8);
+          filter: opacity(0.8);
+  cursor: pointer;
+}
 /*# sourceMappingURL=style.css.map */
