@@ -27,7 +27,7 @@ header {
       -ms-flex-pack: center;
           justify-content: center;
   background-attachment: fixed;
-  background-position: 10%;
+  background-position: 30%;
   background-repeat: no-repeat;
   background-size: cover;
   -webkit-transition: .5s;
@@ -35,7 +35,7 @@ header {
 }
 
 header h1 {
-  color: #fff;
+  color: #000;
   font-size: 2em;
 }
 

@@ -1,12 +1,14 @@
 const search_name = document.getElementById('pkm-search');
 const pkm_container = document.getElementById('pkm-container')
+
 const pkm_name = document.getElementById('name');
 const pkm_abilities = document.getElementById('abilities')
 const pkm_order = document.getElementById('order')
 const pkm_image = document.getElementById('image')
 const pkm_type = document.getElementById('type')
 
-search_name.addEventListener('input', () => {
+
+search_name.addEventListener('change', () => {
     getContent(search_name.value.toLowerCase());
 })
 
@@ -26,7 +28,8 @@ function getContent(param) {
                 
                 pkm_name.innerHTML = `${firstLetterUpperCase(results[0].data.name)}`;
 
-                pkm_abilities.innerHTML = `Abilities: ${firstLetterUpperCase(results[0].data.abilities[0].ability.name)} and ${firstLetterUpperCase(results[0].data.abilities[1].ability.name)}`
+                removeAllChildNodes(pkm_abilities);
+                getAbilities(results[0].data.abilities)
 
                 pkm_order.innerHTML = `Nº ${results[0].data.id}`
 
@@ -45,6 +48,26 @@ function firstLetterUpperCase(param) {
     let world = param.slice(1);
 
     return (upper + world);
+}
+
+function getAbilities(param) {
+    let abilities = ''
+    let i;
+    for(i = 0; i < param.length; i++){
+        if(i === 0){
+            abilities += `${firstLetterUpperCase(param[i].ability.name)}`;
+        }
+        else{
+            abilities += ` and ${firstLetterUpperCase(param[i].ability.name)}`
+        }
+    }
+
+    if(i === 1){
+        pkm_abilities.innerHTML = `Ability : ${abilities}`;
+    }
+    else{
+        pkm_abilities.innerHTML = `Abilities : ${abilities}`;
+    }
 }
 
 function getType(array) {
