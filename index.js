@@ -16,30 +16,33 @@ function getPokemon(name) {
     return axios.get(`https://pokeapi.co/api/v2/pokemon/${name}`);
 }
 
-function getContent(param) {
+async function getContent(param) {
     if(param === ''){
         pkm_container.style.display = 'none'
         removeAllChildNodes(pkm_type);
     }
     else{
-        Promise.all([getPokemon(param)])
-        .then( (results) => {
-                pkm_container.style.display = 'flex'
-                
-                pkm_name.innerHTML = `${firstLetterUpperCase(results[0].data.name)}`;
+        try {
+            const pokemon = await getPokemon(param);
+        
+            pkm_container.style.display = 'flex'
+                    
+            pkm_name.innerHTML = `${firstLetterUpperCase(pokemon.data.name)}`;
 
-                removeAllChildNodes(pkm_abilities);
-                getAbilities(results[0].data.abilities)
+            removeAllChildNodes(pkm_abilities);
+            getAbilities(pokemon.data.abilities)
 
-                pkm_order.innerHTML = `Nº ${results[0].data.id}`
+            pkm_order.innerHTML = `Nº ${pokemon.data.id}`
 
-                removeAllChildNodes(pkm_type);
-                createTypeBtn(getType(results[0].data.types));
+            removeAllChildNodes(pkm_type);
+            createTypeBtn(getType(pokemon.data.types));
 
-                pkm_image.style.display = 'block'
+            pkm_image.style.display = 'block'
 
-                pkm_image.src = results[0].data.sprites.front_default;
-            });
+            pkm_image.src = pokemon.data.sprites.front_default;
+        } catch (error) {
+            alert('Not found this pokemon!')
+        }
     }
 }
 
@@ -150,4 +153,3 @@ function removeAllChildNodes(parent) {
         parent.removeChild(parent.lastChild);
     }
 }
-
