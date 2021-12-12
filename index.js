@@ -7,8 +7,11 @@ const pkm_order = document.getElementById('order')
 const pkm_image = document.getElementById('image')
 const pkm_type = document.getElementById('type')
 
+const load_spinner = document.getElementById('spinner')
+
 
 search_name.addEventListener('change', () => {
+    load_spinner.style.display = 'block'
     getContent(search_name.value.toLowerCase());
 })
 
@@ -19,12 +22,14 @@ function getPokemon(name) {
 async function getContent(param) {
     if(param === ''){
         pkm_container.style.display = 'none'
+        load_spinner.style.display = 'none'
         removeAllChildNodes(pkm_type);
     }
     else{
         try {
             const pokemon = await getPokemon(param);
         
+            load_spinner.style.display = 'none'
             pkm_container.style.display = 'flex'
                     
             pkm_name.innerHTML = `${firstLetterUpperCase(pokemon.data.name)}`;
@@ -42,6 +47,7 @@ async function getContent(param) {
             pkm_image.src = pokemon.data.sprites.front_default;
         } catch (error) {
             alert('Not found this pokemon!')
+            load_spinner.style.display = 'none'
         }
     }
 }
